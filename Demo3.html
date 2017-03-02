@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app="plunker" >
+<head>
+  <meta charset="utf-8">
+  <title>AngularJS Plunker</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="MainCtrl">
+      RUM:<span>{{mandat.rum}}</span>
+      FirstName:<span>{{mandat.person.firstname}}</span>
+    <input type="text" ng-model="mandat.person.firstname" />
+    <my-directive mandateperson="mandat.person" >
+
+      </my-directive>
+    <script type="text/javascript">
+        var app = angular.module('plunker', []);
+
+        app.controller('MainCtrl', function ($scope) {
+            $scope.mandat = { name: "John", surname: "Doe", person: { id: 1408, firstname: "sam" } };
+        });
+
+
+        app.directive('myDirective', function () {
+            return {
+                restrict: 'E',
+                template: "<div><span>{{mandateperson.id}}<span><input type='text' ng-model='mandateperson.firstname' /></div>",
+                replace: true,
+                scope: { mandateperson: '=' }
+                }
+            }
+        )
+    </script>
+</body>
+</html>
